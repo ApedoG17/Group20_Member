@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://cdn-icons-png.flaticon.com/512/6134/6134065.png" alt="Project Logo" width="100">
-  <h2 align="center">MemberTrackr</h2>
+  <h2 align="center">MemberTracker</h2>
   <p align="center">A Simple Member Management System 👥 built as a semester project</p>
 </p>
 
@@ -11,7 +11,7 @@
 **MemberTrackr** is a CRUD (Create, Read, Update, Delete) application for managing members in a group or organization.
 
 > 🎯 It’s built under the entity: **"Member"** in the category **"People & Roles"**.
-
+>  A user will have to sign up to take charge of this management system. After that, the features below will be the operations that can be takenn
 ---
 
 ## 🚀 Features
