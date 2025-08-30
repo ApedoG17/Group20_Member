@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Member Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <nav class="top-nav" style="background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; align-items:center; justify-content:space-between; padding:0.7rem 2rem;">
+        <div class="nav-brand" style="font-size:1.3rem; font-weight:700;">
+            <a href="index.html" style="color:#1e293b; text-decoration:none;"><i class="fas fa-users-gear" style="margin-right: 8px; color: #4CAF50;"></i>GROUP 20</a>
+        </div>
+        <div class="nav-links" style="display:flex; gap:2rem;">
+            <a href="index.html" style="color:#1e293b; text-decoration:none; font-weight:500;">Home</a>
+            <a href="#features" style="color:#1e293b; text-decoration:none; font-weight:500;">Features</a>
+            <a href="about.html" style="color:#1e293b; text-decoration:none; font-weight:500;">About</a>
+        </div>
+    </nav>
+    <div class="login-container">
+        <div class="login-card">
+            <h2 class="login-title">Sign In to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group" style="width:100%; max-width:350px; margin:0 auto;">
+                    <label for="identifier">Email or Phone Number</label>
+                    <input type="text" id="identifier" name="identifier" placeholder="Enter email or phone" required style="width:100%; padding:12px; border-radius:6px; border:1px solid #e2e8f0; font-size:1rem;">
+                </div>
+                <div class="form-group" style="width:100%; max-width:350px; margin:0 auto;">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required style="width:100%; padding:12px; border-radius:6px; border:1px solid #e2e8f0; font-size:1rem;">
+                </div>
+                <div class="form-group" style="width:100%; max-width:350px; margin:0 auto;">
+                    <button type="submit" class="login-btn">Log In</button>
+                </div>
+                <div class="form-group" style="width:100%; max-width:350px; margin:0 auto;">
+                    <div class="login-or">or</div>
+                </div>
+                <div class="form-group" style="width:100%; max-width:350px; margin:0 auto;">
+                    <div class="login-error" id="loginError"></div>
+                </div>
+            </form>
+            <div class="login-footer">
+                <span>Don't have an account?</span> <a href="registration.html">Sign Up</a>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

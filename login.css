@@ -1,0 +1,116 @@
+body {
+    font-family: 'Inter', Helvetica, Arial, sans-serif;
+    background: #f3f4f6;
+    margin: 0;
+    color: #1e293b;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+.login-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 24px rgba(30,64,175,0.08);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 2rem auto;
+}
+.login-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1E40AF;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.form-group {
+    margin-bottom: 1.3rem;
+}
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #64748b;
+}
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    font-size: 1rem;
+    background: #f9fafb;
+    color: #1e293b;
+    outline: none;
+    transition: border 0.2s;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #10b981;
+}
+.login-btn {
+    width: 100%;
+    background: #10b981;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.login-btn:hover {
+    background: #059669;
+}
+.google-btn {
+    width: 100%;
+    background: #fff;
+    color: #1e293b;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, border 0.2s;
+    margin-top: 0.5rem;
+}
+.google-btn i {
+    color: #ea4335;
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+.google-btn:hover {
+    background: #f3f4f6;
+    border-color: #10b981;
+}
+.login-or {
+    text-align: center;
+    color: #64748b;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+.login-error {
+    color: #ef4444;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+.login-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+}
+.login-footer a {
+    color: #10b981;
+    text-decoration: none;
+    font-weight: 600;
+}
+.login-footer a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 500px) {
+    .login-card { padding: 1rem 0.5rem; }
+}

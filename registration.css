@@ -1,0 +1,206 @@
+/* registration.css */
+:root {
+    --primary-color: #4CAF50;
+    --error-color: #f44336;
+    --success-color: #4caf50;
+    --text-color: #1e293b;
+    --border-color: #e0e0e0;
+    --background-color: #f5f5f5;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+.top-nav {
+    background: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-brand i {
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background: rgba(76, 175, 80, 0.1);
+    color: var(--primary-color);
+}
+
+.registration-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.registration-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.registration-title {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+}
+
+.form-group.terms {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+}
+
+.terms label {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.terms a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.form-messages {
+    margin-bottom: 1rem;
+}
+
+.error-message,
+.success-message {
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.error-message {
+    background: rgba(244, 67, 54, 0.1);
+    color: var(--error-color);
+}
+
+.success-message {
+    background: rgba(76, 175, 80, 0.1);
+    color: var(--success-color);
+}
+
+.btn-primary {
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background: #43a047;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.form-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+@media (max-width: 480px) {
+    .registration-card {
+        padding: 1.5rem;
+    }
+    
+    .registration-container {
+        padding: 1rem;
+    }
+}

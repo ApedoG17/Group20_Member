@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="top-nav" role="navigation">
+        <div class="nav-brand">
+            <a href="index.html"><i class="fas fa-users-gear"></i>GROUP 20</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+            <a href="about.html">About</a>
+            <a href="features.html"><i class="fas fa-star"></i> Features</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-action" id="navAction">
+            <!-- Dynamic buttons will be rendered here by JS -->
+        </div>
+    </nav>
+    <script>
+    function getProfileImage() {
+        return localStorage.getItem('profileImage') || 'https://via.placeholder.com/40x40?text=U';
+    }
+    function getFirstName() {
+        return localStorage.getItem('firstName') || '';
+    }
+    function isLoggedIn() {
+        return localStorage.getItem('isRegistered') === 'true';
+    }
+    function renderNavAction() {
+        const nav = document.getElementById('navAction');
+        nav.innerHTML = '';
+        if (isLoggedIn()) {
+            // Log Out button
+            const logoutBtn = document.createElement('a');
+            logoutBtn.className = 'btn-login';
+            logoutBtn.style = 'background:#ef4444; color:#fff; padding:0.5rem 1.2rem; border-radius:5px; font-weight:600; margin-right:0.5rem; text-decoration:none; transition:background 0.2s;';
+            logoutBtn.textContent = 'Log Out';
+            logoutBtn.href = '#';
+            logoutBtn.onclick = function(e) {
+                e.preventDefault();
+                localStorage.removeItem('isRegistered');
+                localStorage.removeItem('profileImage');
+                localStorage.removeItem('firstName');
+                window.location.reload();
+            };
+            nav.appendChild(logoutBtn);
+            // Dashboard button
+            const dashboardBtn = document.createElement('a');
+            dashboardBtn.className = 'btn-login';
+            dashboardBtn.style = 'background:#10b981; color:#fff; padding:0.5rem 1.2rem; border-radius:5px; font-weight:600; margin-right:0.5rem; text-decoration:none; transition:background 0.2s;';
+            dashboardBtn.textContent = 'Dashboard';
+            dashboardBtn.href = 'dashboard.html';
+            nav.appendChild(dashboardBtn);
+            // Profile icon only (no dropdown)
+            const profileDiv = document.createElement('div');
+            profileDiv.style = 'display:inline-block; position:relative; margin-left:0.5rem;';
+            const firstName = getFirstName();
+            const initial = firstName ? firstName.charAt(0).toUpperCase() : 'U';
+            profileDiv.innerHTML = `<span class="profile-initial" style="width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; background:#10b981; color:#fff; font-size:1.3rem; font-weight:700; vertical-align:middle; cursor:pointer; border:2px solid #10b981;">${initial}</span>`;
+            nav.appendChild(profileDiv);
+        } else {
+            // Sign Up button only
+            const signupBtn = document.createElement('a');
+            signupBtn.className = 'btn-signup';
+            signupBtn.style = 'background:#10b981; color:#fff; padding:0.5rem 1.2rem; border-radius:5px; font-weight:600; text-decoration:none; transition:background 0.2s;';
+            signupBtn.textContent = 'Sign Up';
+            signupBtn.href = 'registration.html';
+            nav.appendChild(signupBtn);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', renderNavAction);
+    // Hamburger menu logic for mobile
+    document.addEventListener('DOMContentLoaded', function() {
+        renderNavAction();
+        var navToggle = document.getElementById('navToggle');
+        var navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+        // Close nav links when clicking outside (mobile)
+        document.addEventListener('click', function(e) {
+            if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+    });
+    </script>
+
+    <header class="hero-header">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Modernize Your Member Management System</h1>
+                <p class="hero-subtitle">
+                    Complete CRUD operations made simple. Create, view, update, and delete member records 
+                    with our intuitive software designed for beginners and professionals alike.
+                </p>
+                
+                <div class="feature-list">
+                    <div class="feature-item rgb-glow">
+                        <i class="fas fa-users" style="color: #60A5FA;"></i>
+                        <span>Easy Member Creation</span>
+                    </div>
+                    <div class="feature-item rgb-glow">
+                        <i class="fas fa-search" style="color: #FBBF24;"></i>
+                        <span>Instant Data Access</span>
+                    </div>
+                    <div class="feature-item rgb-glow">
+                        <i class="fas fa-bolt" style="color: #34D399;"></i>
+                        <span>Quick Updates</span>
+                    </div>
+                </div>
+
+                <div class="cta-group">
+                    <a href="registration.html" class="cta-primary">
+                        Sign Up Now To Take Charge of These Operations
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-container"></div>
+                    <img src="https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Professional Business Dashboard">
+                    <div class="image-overlay">
+                        <span class="overlay-text">Group 20 Companies</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="core-functions">
+        <div class="container">
+            <h2 class="section-title">Core Functionalities</h2>
+            <p class="section-subtitle">Everything you need to manage members efficiently</p>
+            
+            <div class="function-grid">
+                <div class="function-card" style="background: rgba(16, 185, 129, 0.1);">
+                    <div class="card-icon" style="color: #10b981;">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Create Entity</h3>
+                        <p>Add new members with validation.</p>
+                        <span class="card-cta" style="color: #10b981; font-weight:600; opacity:0.7; cursor:pointer;" onclick="window.location.href='registration.html'">Add Member</span>
+                    </div>
+                </div>
+
+                <div class="function-card" style="background: rgba(59, 130, 246, 0.1);">
+                    <div class="card-icon" style="color: #3b82f6;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>View Details</h3>
+                        <p>Access member information instantly.</p>
+                        <span class="card-cta" style="color: #3b82f6; font-weight:600; opacity:0.7; cursor:pointer;" onclick="window.location.href='registration.html'">View Members</span>
+                    </div>
+                </div>
+
+                <div class="function-card" style="background: rgba(245, 158, 11, 0.1);">
+                    <div class="card-icon" style="color: #f59e0b;">
+                        <i class="fas fa-user-edit"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Update Details</h3>
+                        <p>Modify member information seamlessly.</p>
+                        <span class="card-cta" style="color: #f59e0b; font-weight:600; opacity:0.7; cursor:pointer;" onclick="window.location.href='registration.html'">Edit Members</span>
+                    </div>
+                </div>
+
+                <div class="function-card" style="background: rgba(239, 68, 68, 0.1);">
+                    <div class="card-icon" style="color: #ef4444;">
+                        <i class="fas fa-user-minus"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Delete Entity</h3>
+                        <p>Safely remove member records.</p>
+                        <span class="card-cta" style="color: #ef4444; font-weight:600; opacity:0.7; cursor:pointer;" onclick="window.location.href='registration.html'">Manage Members</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="animated-bg">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+        </div>
+        <div class="container">
+            <div class="hiw-content">
+                <div class="text-content">
+                    <h2 class="section-title">How Our System Works</h2>
+                    <p class="section-subtitle">Understanding the architecture behind your member management system</p>
+                    
+                    <div class="steps" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 1200px; margin: 3rem auto;">
+                        <div class="step">
+                            <span class="step-number">01</span>
+                            <div class="step-content">
+                                <div class="step-header">
+                                    <i class="fas fa-desktop" style="color: #4f46e5;"></i>
+                                    <h3>Front-End Interface</h3>
+                                </div>
+                                <p class="step-description">User-friendly screens and pages for intuitive member management.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <span class="step-number">02</span>
+                            <div class="step-content">
+                                <div class="step-header">
+                                    <i class="fas fa-cogs" style="color: #3b82f6;"></i>
+                                    <h3>Back-End Processing</h3>
+                                </div>
+                                <p class="step-description">Robust data processing with security validation.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <span class="step-number">03</span>
+                            <div class="step-content">
+                                <div class="step-header">
+                                    <i class="fas fa-database" style="color: #10b981;"></i>
+                                    <h3>Database Storage</h3>
+                                </div>
+                                <p class="step-description">Secure and efficient data storage with backup systems.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <span class="step-number">04</span>
+                            <div class="step-content">
+                                <div class="step-header">
+                                    <i class="fas fa-sync-alt" style="color: #4f46e5;"></i>
+                                    <h3>Data Flow Integration</h3>
+                                </div>
+                                <p class="step-description">Real-time updates and seamless synchronization.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose-us" style="background:#f9fafb; padding:4rem 2rem;">
+        <div class="container" style="max-width:1200px; margin:0 auto;">
+            <h2 class="section-title" style="font-size:2rem; font-weight:700; color:#1e293b; text-align:center; margin-bottom:1rem;">Why Choose Our Solution?</h2>
+            <p class="section-subtitle" style="font-size:1.1rem; color:#64748b; text-align:center; max-width:700px; margin:0 auto 2.5rem auto;">Built with beginners in mind, yet powerful enough for professionals</p>
+            <div class="features-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:2.5rem;">
+                <div class="feature-card" style="background:#fff; border-radius:12px; box-shadow:0 10px 15px rgba(0,0,0,0.05); padding:1.5rem; text-align:center; transition:transform 0.2s, box-shadow 0.2s;">
+                    <div class="feature-icon" style="margin-bottom:1rem;">
+                        <i class="fas fa-graduation-cap" style="font-size:28px; color:#7c3aed;"></i>
+                    </div>
+                    <h3 style="font-size:1.15rem; font-weight:600; color:#1e293b; margin-bottom:0.5rem;">Beginner-Friendly Design</h3>
+                    <p style="color:#64748b;">Perfect starting point for teams new to member management systems. Intuitive interface makes learning easy.</p>
+                </div>
+                <div class="feature-card" style="background:#fff; border-radius:12px; box-shadow:0 10px 15px rgba(0,0,0,0.05); padding:1.5rem; text-align:center; transition:transform 0.2s, box-shadow 0.2s;">
+                    <div class="feature-icon" style="margin-bottom:1rem;">
+                        <i class="fas fa-sync-alt" style="font-size:28px; color:#2563eb;"></i>
+                    </div>
+                    <h3 style="font-size:1.15rem; font-weight:600; color:#1e293b; margin-bottom:0.5rem;">Complete CRUD Operations</h3>
+                    <p style="color:#64748b;">All essential database operations in one place. Create, read, update, and delete with confidence.</p>
+                </div>
+                <div class="feature-card" style="background:#fff; border-radius:12px; box-shadow:0 10px 15px rgba(0,0,0,0.05); padding:1.5rem; text-align:center; transition:transform 0.2s, box-shadow 0.2s;">
+                    <div class="feature-icon" style="margin-bottom:1rem;">
+                        <i class="fas fa-chart-line" style="font-size:28px; color:#059669;"></i>
+                    </div>
+                    <h3 style="font-size:1.15rem; font-weight:600; color:#1e293b; margin-bottom:0.5rem;">Scalable Architecture</h3>
+                    <p style="color:#64748b;">Start simple and expand functionality as your needs grow. Built with scalability in mind.</p>
+                </div>
+                <div class="feature-card" style="background:#fff; border-radius:12px; box-shadow:0 10px 15px rgba(0,0,0,0.05); padding:1.5rem; text-align:center; transition:transform 0.2s, box-shadow 0.2s;">
+                    <div class="feature-icon" style="margin-bottom:1rem;">
+                        <i class="fas fa-lock" style="font-size:28px; color:#dc2626;"></i>
+                    </div>
+                    <h3 style="font-size:1.15rem; font-weight:600; color:#1e293b; margin-bottom:0.5rem;">Secure & Reliable</h3>
+                    <p style="color:#64748b;">Core validation ensures your information is always protected. Built-in security features keep data safe.</p>
+                </div>
+                <div class="feature-card" style="background:#fff; border-radius:12px; box-shadow:0 10px 15px rgba(0,0,0,0.05); padding:1.5rem; text-align:center; transition:transform 0.2s, box-shadow 0.2s;">
+                    <div class="feature-icon" style="margin-bottom:1rem;">
+                        <i class="fas fa-bolt" style="font-size:28px; color:#d97706;"></i>
+                    </div>
+                    <h3 style="font-size:1.15rem; font-weight:600; color:#1e293b; margin-bottom:0.5rem;">Quick Setup Process</h3>
+                    <p style="color:#64748b;">Simple configuration gets you up and running. Start managing members immediately.</p>
+                </div>
+            </div>
+            <div class="section-cta" style="margin-top:2.5rem; text-align:center;">
+                <a href="registration.html" class="cta-primary" style="background:#7c3aed; color:#fff; padding:0.75rem 2rem; border-radius:6px; font-weight:600; text-decoration:none; font-size:1.1rem; transition:background 0.2s;">Start Your First Project</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <h2 class="footer-brand">GROUP 20</h2>
+                <p class="footer-tagline">Streamline your member management with our comprehensive solution</p>
+                <ul class="crud-features">
+                    <li>Create</li>
+                    <li>Read</li>
+                    <li>Update</li>
+                    <li>Delete</li>
+                </ul>
+                <div class="copyright">
+                    <p>© 2024 Group 20. All rights reserved.</p>
+                    <p>Member Management System - CRUD Operations Made Simple</p>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-navigation">
+                    <h3>Navigation</h3>
+                    <table class="nav-contact-table">
+                        <tbody>
+                            <tr>
+                                <td class="nav-label">Dashboard</td>
+                                <td class="nav-contact"><i class="fas fa-phone"></i> (233) 593-800-950</td>
+                            </tr>
+                            <tr>
+                                <td class="nav-label">View Members</td>
+                                <td class="nav-contact"><i class="fab fa-twitter"></i> group20companies</td>
+                            </tr>
+                            <tr>
+                                <td class="nav-label">Add Member</td>
+                                <td class="nav-contact"><i class="fas fa-globe"></i> group20companies</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer-cta-text">
+                    Need more management systems like this? Contact us for custom solutions tailored to your business needs.
+                </div>
+                <a href="contact.html" class="footer-cta-btn" target="_blank">Get In Touch →</a>
+            </div>
+        </div>
+        <div class="footer-banner">
+            100% Functional • Team Ready
+        </div>
+    </footer>
+    
+</body>
+</html>

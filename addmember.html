@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Member</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="addmember.css">
+</head>
+<body class="cinematic-bg">
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <a href="dashboard.html">
+                <i class="fas fa-users-gear"></i>GROUP 20
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="members.html">Members</a>
+            <a href="addmember.html" class="active">Add Member</a>
+            <a href="logout.html" class="logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="form-card">
+            <div class="form-header">
+                <h1><i class="fas fa-user-plus"></i><span id="formTitle">Add New Member</span></h1>
+                <p id="formSubtitle">Enter member details below</p>
+            </div>
+
+            <form id="addMemberForm">
+                <div class="form-section">
+                    <h2>Personal Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName">First Name*</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required pattern="^[A-Za-z]+$">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name*</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required pattern="^[A-Za-z]+$">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="email">Email Address*</label>
+                            <input type="email" id="email" name="memberEmail" placeholder="Enter email" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Contact Details</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="phone">Phone Number*</label>
+                            <input type="tel" id="phone" name="memberPhone" placeholder="Enter phone number" required pattern="^[+]?[0-9\s()-]{10,}$">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" placeholder="Enter location">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Role Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="role">Role*</label>
+                            <select id="role" name="memberRole" required>
+                                <option value="">Select Role</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Staff">Staff</option>
+                                <option value="Executive">Executive</option>
+                                <option value="Intern">Intern</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="otherRoleGroup" style="display:none;">
+                            <label for="otherRole">Specify Role</label>
+                            <input type="text" id="otherRole" name="otherRole" placeholder="Enter custom role">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="window.location.href='dashboard.html'">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Member</button>
+                </div>
+
+                <div class="form-messages">
+                    <div class="error-message" id="addMemberError"></div>
+                    <div class="success-message" id="addMemberSuccess"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+    // Check if we're editing an existing member
+    const urlParams = new URLSearchParams(window.location.search);
+    const isEditing = urlParams.get('edit') === 'true';
+    const editingMember = isEditing ? JSON.parse(localStorage.getItem('editingMember')) : null;
+
+    if (isEditing && editingMember) {
+        document.getElementById('formTitle').textContent = 'Edit Member';
+        document.getElementById('formSubtitle').textContent = 'Update member details below';
+        document.querySelector('.btn-primary').textContent = 'Save Changes';
+        
+        // Fill form with member data
+        document.getElementById('firstName').value = editingMember.firstName;
+        document.getElementById('lastName').value = editingMember.lastName;
+        document.getElementById('email').value = editingMember.email;
+        document.getElementById('phone').value = editingMember.phone;
+        document.getElementById('role').value = editingMember.role;
+        
+        if (editingMember.role === 'Other') {
+            document.getElementById('otherRoleGroup').style.display = 'block';
+            document.getElementById('otherRole').value = editingMember.role;
+        }
+    }
+
+    document.getElementById('role').addEventListener('change', function() {
+        document.getElementById('otherRoleGroup').style.display = this.value === 'Other' ? 'block' : 'none';
+    });
+
+    const form = document.getElementById('addMemberForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const firstName = this.firstName.value.trim();
+            const lastName = this.lastName.value.trim();
+            const email = this.memberEmail.value.trim();
+            const phone = this.memberPhone.value.trim();
+            let role = this.memberRole.value;
+            
+            if (role === 'Other') {
+                role = this.otherRole.value.trim() || 'Other';
+            }
+
+            const errorDiv = document.getElementById('addMemberError');
+            const successDiv = document.getElementById('addMemberSuccess');
+            errorDiv.textContent = '';
+            successDiv.textContent = '';
+
+            // Validate fields
+            if (!firstName || !lastName || !email || !phone || !role) {
+                errorDiv.textContent = 'Please fill all required fields.';
+                return;
+            }
+
+            if (!/^\S+@\S+\.\S+$/.test(email)) {
+                errorDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            if (!/^[+]?[0-9\s()-]{10,}$/.test(phone)) {
+                errorDiv.textContent = 'Please enter a valid phone number.';
+                return;
+            }
+
+            let members = JSON.parse(localStorage.getItem('members')) || [];
+            
+            const memberData = {
+                id: isEditing ? editingMember.id : Date.now(),
+                firstName: firstName,
+                lastName: lastName,
+                fullName: `${firstName} ${lastName}`,
+                email: email,
+                phone: phone,
+                role: role
+            };
+
+            if (isEditing) {
+                // Update existing member
+                members = members.map(member => 
+                    member.id === editingMember.id ? memberData : member
+                );
+                successDiv.textContent = 'Member updated successfully!';
+            } else {
+                // Add new member
+                members.push(memberData);
+                successDiv.textContent = 'Member added successfully!';
+            }
+            
+            localStorage.setItem('members', JSON.stringify(members));
+            if (isEditing) {
+                localStorage.removeItem('editingMember');
+            }
+            
+            // Reset form
+            this.reset();
+            document.getElementById('otherRoleGroup').style.display = 'none';
+            
+            // Redirect to members page
+            setTimeout(() => {
+                window.location.href = 'members.html';
+            }, 1500);
+        });
+    }
+    </script>
+</body>
+</html>

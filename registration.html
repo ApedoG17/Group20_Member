@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Member Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="registration.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <a href="index.html"><i class="fas fa-users-gear"></i>GROUP 20</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+    <div class="registration-container">
+        <div class="registration-card">
+            <h2 class="registration-title">Create Your Account</h2>
+            <form id="registrationForm" autocomplete="off">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required placeholder="Enter your last name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" required placeholder="Create a password">
+                        <span class="toggle-password" id="togglePassword"><i class="fas fa-eye"></i></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                        <span class="toggle-password" id="toggleConfirmPassword"><i class="fas fa-eye"></i></span>
+                    </div>
+                </div>
+                <div class="form-group terms">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+                </div>
+                <div class="form-messages">
+                    <div class="error-message" id="registrationError"></div>
+                    <div class="success-message" id="registrationSuccess"></div>
+                </div>
+                <button type="submit" class="btn-primary">Sign Up</button>
+                <div class="form-footer">
+                    Already have an account? <a href="login.html">Log In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="registration.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="members.css">
+</head>
+<body>
+    <nav class="top-nav" style="background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; align-items:center; justify-content:space-between; padding:0.7rem 2rem;">
+        <div class="nav-brand" style="font-size:1.3rem; font-weight:700;">
+            <a href="dashboard.html" style="color:#1e293b; text-decoration:none;">
+                <i class="fas fa-users-gear" style="margin-right: 8px; color: #4CAF50;"></i>GROUP 20
+            </a>
+        </div>
+        <div class="nav-links" style="display:flex; gap:2rem;">
+            <a href="dashboard.html" style="color:#1e293b; text-decoration:none; font-weight:500;">Dashboard</a>
+            <a href="members.html" style="color:#1e293b; text-decoration:none; font-weight:500;">Members</a>
+            <a href="addmember.html" style="color:#1e293b; text-decoration:none; font-weight:500;">Add Member</a>
+            <a href="logout.html" style="color:#ef4444; text-decoration:none; font-weight:500;">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="members-header">
+            <h1><i class="fas fa-users"></i> Members Directory</h1>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search members...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <button class="add-btn" onclick="window.location.href='addmember.html'">
+                    <i class="fas fa-plus"></i> Add Member
+                </button>
+            </div>
+        </div>
+
+        <div class="members-table-container">
+            <table id="membersTable" class="members-table">
+                <thead>
+                    <tr>
+                        <th data-sort="id">ID <i class="fas fa-sort"></i></th>
+                        <th data-sort="fullName">Full Name <i class="fas fa-sort"></i></th>
+                        <th data-sort="email">Email <i class="fas fa-sort"></i></th>
+                        <th data-sort="phone">Phone <i class="fas fa-sort"></i></th>
+                        <th data-sort="role">Role <i class="fas fa-sort"></i></th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="membersTableBody">
+                    <!-- Table rows will be dynamically populated -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal for editing member -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Edit Member</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <form id="editMemberForm">
+                    <input type="hidden" id="editMemberId">
+                    <div class="form-group">
+                        <label for="editFirstName">First Name</label>
+                        <input type="text" id="editFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editLastName">Last Name</label>
+                        <input type="text" id="editLastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">Email</label>
+                        <input type="email" id="editEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPhone">Phone</label>
+                        <input type="tel" id="editPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editRole">Role</label>
+                        <select id="editRole" required>
+                            <option value="Manager">Manager</option>
+                            <option value="Developer">Developer</option>
+                            <option value="Designer">Designer</option>
+                            <option value="Analyst">Analyst</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeEditModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="members.js"></script>
+</body>
+</html>
